@@ -1,0 +1,15 @@
+{
+  "id":"default",
+  "background":"game/imgs/inside.png",
+  "audio":{
+    "music":"game/music/wind_inside.mp3",
+    "crossfade":0.5
+  },
+  "hotspots":[
+    {
+      "name":"back",
+      "rect":{"x":0,"y":0,"w":427,"h":240},
+      "on_click":"back"
+    }
+  ]
+}

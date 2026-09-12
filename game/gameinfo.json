@@ -1,0 +1,12 @@
+{
+  "title": "Cabin in the Woods",
+  "window": {
+    "width": 427,
+    "height": 240,
+    "fullscreen": true
+  },
+  "entry": {
+    "default_scene": "game/scenes/outside.json",
+    "main_script": "game/scripts/main.lua"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id":"default",
+  "background":"game/imgs/background.png",
+  "audio":{
+    "music":"game/music/ambient.mp3",
+    "crossfade":0
+  },
+  "hotspots":[
+    {
+      "name":"test",
+      "rect":{"x":0,"y":0,"w":800,"h":600},
+      "on_click":"test"
+    }
+  ]
+}
