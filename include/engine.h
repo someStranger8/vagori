@@ -16,8 +16,12 @@
 
 typedef struct {
     char name[64];
-    SDL_Rect rect;
     char lua_callback[64];
+    SDL_Rect rect;
+
+    bool is_visible;
+    SDL_Texture* sprite_texture;
+    SDL_Rect sprite_rect;
 } Hotspot;
 
 typedef struct {

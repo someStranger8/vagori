@@ -1,4 +1,5 @@
 #include "../include/lua_bindings.h"
+#include "../include/engine.h"
 #include "../include/inventory.h"
 #include "../include/audio.h"
 #include "../include/scene.h"
@@ -35,6 +36,19 @@ static int l_audio_play_sfx(lua_State* L) {
     return 0;
 }
 
+static int l_scene_set_hotspot_visible(lua_State* L) {
+    const char* name = luaL_checkstring(L, 1);
+    bool visible = lua_toboolean(L, 2);
+
+    for (int i = 0; i < g_engine.hotspot_count; ++i) {
+        if (strcmp(g_engine.hotspots[i].name, name) == 0) {
+            g_engine.hotspots[i].is_visible = visible;
+            break;
+        }
+    }
+    return 0;
+}
+
 void lua_register_bindings(lua_State* L) {
     lua_newtable(L);
     
@@ -43,5 +57,6 @@ void lua_register_bindings(lua_State* L) {
     lua_pushcfunction(L, l_audio_play_sfx);   lua_setfield(L, -2, "play_sound");
     lua_pushcfunction(L, l_change_scene); lua_setfield(L, -2, "change_scene");
     lua_pushcfunction(L, l_audio_play_ambient); lua_setfield(L, -2, "play_ambient");
+    lua_pushcfunction(L, l_scene_set_hotspot_visible); lua_setfield(L, -2, "set_hotspot_visible");
     lua_setglobal(L, "Engine");
 }

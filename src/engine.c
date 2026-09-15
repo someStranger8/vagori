@@ -12,6 +12,7 @@
 
 GameEngine g_engine;
 
+// init engine
 bool engine_init(const char* config_path) {
     config_load(config_path, &g_engine.config);
 
@@ -48,6 +49,7 @@ bool engine_init(const char* config_path) {
     return true;
 }
 
+// game loop
 void engine_run(void) {
     Uint32 last_time = SDL_GetTicks();
     while (g_engine.is_running) {
@@ -79,12 +81,23 @@ void engine_run(void) {
         if (g_engine.bg_texture) SDL_RenderCopy(g_engine.renderer, g_engine.bg_texture, NULL, NULL);
         SDL_RenderPresent(g_engine.renderer);
 
-        SDL_Delay(16);
+        if (g_engine.bg_texture) {
+            SDL_RenderCopy(g_engine.renderer, g_engine.bg_texture, NULL, NULL);
+        }
+
+        for (int i = 0; i < g_engine.hotspot_count; ++i) {
+            Hotspot* h = &g_engine.hotspots[i];
+            if (h->is_visible && h->sprite_texture) {
+                SDL_RenderCopy(g_engine.renderer, h->sprite_texture, NULL, &h->sprite_rect);
+            }
+        }
 
         Uint32 current_time = SDL_GetTicks();
         float delta_time = (current_time - last_time) / 1000.0f;
         last_time = current_time;
         audio_update(delta_time);
+
+        SDL_Delay(16);
     }
 }
 
