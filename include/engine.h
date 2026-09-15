@@ -27,14 +27,12 @@ typedef struct {
     lua_State* L;
     ma_engine audio;
 
-    // Scene
     SDL_Texture* bg_texture;
     Hotspot hotspots[MAX_HOTSPOTS];
     int hotspot_count;
     ma_sound ambient_sound;
     bool playing_ambient;
 
-    // Inventory
     char inventory[MAX_ITEMS][64];
     int inventory_count;
 
