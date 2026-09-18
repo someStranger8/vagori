@@ -5,6 +5,7 @@
 #include "../include/scene.h"
 #include <lauxlib.h>
 
+// wrapper functions for lua bindings
 static int l_add_item(lua_State* L) {
     const char* item = luaL_checkstring(L, 1);
     inventory_add(item);
@@ -49,6 +50,7 @@ static int l_scene_set_hotspot_visible(lua_State* L) {
     return 0;
 }
 
+// expose functions
 void lua_register_bindings(lua_State* L) {
     lua_newtable(L);
     

@@ -23,6 +23,7 @@ static CrossfadeState g_crossfade = {
     .paths = {"", ""}
 };
 
+// new ambient music track
 void audio_play_ambient(const char* filepath, float fade_duration) {
     if (!filepath || strlen(filepath) == 0) return;
 
@@ -70,6 +71,7 @@ void audio_play_ambient(const char* filepath, float fade_duration) {
     g_crossfade.is_fading = true;
 }
 
+// crossfade tracks
 void audio_update(float delta_time) {
     if (!g_crossfade.is_fading) return;
 
@@ -99,6 +101,7 @@ void audio_update(float delta_time) {
     }
 }
 
+// clean up crossfade
 void audio_cleanup(void) {
     for (int i = 0; i < 2; ++i) {
         if (g_crossfade.slot_active[i]) {
@@ -108,6 +111,7 @@ void audio_cleanup(void) {
     }
 }
 
+// play sound effect
 void audio_play_sfx(const char* filepath) {
     ma_engine_play_sound(&g_engine.audio, filepath, NULL);
 }

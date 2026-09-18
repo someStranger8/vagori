@@ -4,7 +4,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+// load config
 bool config_load(const char* json_path, GameConfig* config) {
+    // default game config
     strncpy(config->title, "Point & Click Game", 127);
     config->window_width = 800;
     config->window_height = 600;
@@ -34,6 +36,7 @@ bool config_load(const char* json_path, GameConfig* config) {
     cJSON* title = cJSON_GetObjectItemCaseSensitive(json, "title");
     if (cJSON_IsString(title)) strncpy(config->title, title->valuestring, 127);
 
+    // screen size
     cJSON* window = cJSON_GetObjectItemCaseSensitive(json, "window");
     if (cJSON_IsObject(window)) {
         cJSON* w = cJSON_GetObjectItemCaseSensitive(window, "width");
@@ -45,6 +48,7 @@ bool config_load(const char* json_path, GameConfig* config) {
         if (cJSON_IsBool(fs)) config->fullscreen = cJSON_IsTrue(fs);
     }
 
+    // load scene
     cJSON* entry = cJSON_GetObjectItemCaseSensitive(json, "entry");
     if (cJSON_IsObject(entry)) {
         cJSON* scene = cJSON_GetObjectItemCaseSensitive(entry, "default_scene");
