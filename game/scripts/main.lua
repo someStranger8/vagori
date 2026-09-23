@@ -1,8 +1,8 @@
 
 function door()
-  Engine.change_scene("game/scenes/inside.json")
+  Scene.change("game/scenes/inside.json")
 end
 
 function back()
-  Engine.change_scene("game/scenes/outside.json")
+  Scene.change("game/scenes/outside.json")
 end

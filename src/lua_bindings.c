@@ -52,14 +52,24 @@ static int l_scene_set_hotspot_visible(lua_State* L) {
 
 // expose functions
 void lua_register_bindings(lua_State* L) {
+    // default fall backs
+    lua_register(L, "change_scene", l_change_scene);
+    lua_register(L, "add_item", l_add_item);
+    lua_register(L, "has_item", l_has_item);
+    lua_register(L, "play_sfx", l_audio_play_sfx);
+    lua_register(L, "play_ambient", l_audio_play_ambient);
+
     lua_newtable(L);
-    
     lua_pushcfunction(L, l_add_item);     lua_setfield(L, -2, "add");
     lua_pushcfunction(L, l_has_item);     lua_setfield(L, -2, "has");
     lua_setglobal(L, "Inventory");
+
+    lua_newtable(L);
     lua_pushcfunction(L, l_audio_play_sfx);   lua_setfield(L, -2, "play_sound");
     lua_pushcfunction(L, l_audio_play_ambient); lua_setfield(L, -2, "play_ambient");
     lua_setglobal(L, "Audio");
+
+    lua_newtable(L);
     lua_pushcfunction(L, l_change_scene); lua_setfield(L, -2, "change");
     lua_pushcfunction(L, l_scene_set_hotspot_visible); lua_setfield(L, -2, "hotspot_visible");
     lua_setglobal(L, "Scene");
